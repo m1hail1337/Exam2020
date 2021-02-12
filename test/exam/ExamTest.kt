@@ -12,7 +12,8 @@ internal class ExamTest {
 
     @Test
     fun testMyExamTask() {
-        assertEquals("4.1, строка 1, столбец 1", myExamTask("input/examtest1.txt"))
-        assertEquals("3.9, строка 3, столбец 2", myExamTask("input/examtest2.txt"))
+        assertEquals(listOf("(4.1, строка 1, столбец 1)", "(3.9, строка 3, столбец 2)"),
+                myExamTask("input/examtest1.txt"))
+        assertEquals("(3.9, строка 3, столбец 2)", myExamTask("input/examtest2.txt"))
     }
 }

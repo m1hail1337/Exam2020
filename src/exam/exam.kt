@@ -23,9 +23,13 @@ fun example(inputName: String): Int {
 //
 //Найти в матрице хотя бы один седловой элемент, вернуть его значение, номер строки и столбца (номера считать с нуля),
 // например: (4.1, строка 1, столбец 1)
-fun myExamTask(inputName: String) : String {
+//2. Найти в матрице все седловые элементы, вернуть список их значений с номерами строк и столбцов,
+// отсортированный по возрастанию по значению элемента, например: (3.9, строка 3, столбец 2), (4.1, строка 1, столбец 1).
+// Подумать, каким типом лучше представить результат. При нарушении формата входных данных бросить любое исключение.
+fun myExamTask(inputName: String) : List<String> {
     val lines = File(inputName).readLines()
-    val maybe : MutableMap<Int, Double> = mutableMapOf()
+    val maybe = mutableMapOf<Int, Double>()
+    val result = mutableMapOf<Double, String>()
     for (i in 0 until lines.size - 2 ) {
         val str1 = lines[i].split(" ")
         val str2 = lines[i+1].split(" ")
@@ -36,8 +40,9 @@ fun myExamTask(inputName: String) : String {
         }
         for (pair in maybe) {
             if ((pair.value < str1[pair.key].toDouble() && (pair.value < str3[pair.key].toDouble())))
-                return "${pair.value}, строка ${i+1}, столбец ${pair.key}"
+                result[pair.value] += "(${pair.value}, строка ${i+1}, столбец ${pair.key})"
         }
     }
-    return ""
+
+    return result.toSortedMap().values.toList()
 }
